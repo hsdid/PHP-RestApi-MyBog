@@ -87,7 +87,8 @@ class Post {
     ///Create Post
     public function create(){
         // Create query 
-        $query = 'INSERT INTO '.$this->table.' SET 
+        $query = 'INSERT INTO '.$this->table.
+        ' SET 
         title = :title,
         body = :body,
         author = :author,
@@ -98,9 +99,9 @@ class Post {
 
         //Clean data
         $this->title = htmlspecialchars(strip_tags($this->title));
-        $this->title = htmlspecialchars(strip_tags($this->body));
-        $this->title = htmlspecialchars(strip_tags($this->author));
-        $this->title = htmlspecialchars(strip_tags($this->category_id));
+        $this->body = htmlspecialchars(strip_tags($this->body));
+        $this->author = htmlspecialchars(strip_tags($this->author));
+        $this->category_id = htmlspecialchars(strip_tags($this->category_id));
 
         //Bind data
         $stmt->bindParam(':title', $this->title);
@@ -114,7 +115,7 @@ class Post {
         } 
 
         //Print error if something goes wrong
-        print_r("Error: %s.\n",$stmt->error);
+        printf("Error: %s.\n",$stmt->error);
 
         return false;
     }
